@@ -213,6 +213,23 @@ def _setup_gateway(hass, hass_config, host, name,
             title='IKEA Trådfri setup error'
             )
         return False
+    except Exception as ex:
+        if str(ex).startswith("[Errno -1] Unknown error -1"):
+            _LOGGER.error("="*79)
+            _LOGGER.error("invalid key for Trådfri!"
+                          " please clear {}".format(CONFIG_FILE))
+
+            # alternatively, more drastic measures:
+            # _LOGGER.error("invalid key for Trådfri!"
+            #               " removing {}".format(hass.config.path(CONFIG_FILE)))
+            # os.remove(hass.config.path(CONFIG_FILE))
+
+            _LOGGER.error("="*79)
+            _LOGGER.exception(str(ex))
+
+            # TODO kill subprocess somehow
+
+            return False
 
     gateway_id = gateway_info_result.id
     hass.data.setdefault(KEY_API, {})
