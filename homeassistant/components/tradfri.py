@@ -244,8 +244,13 @@ def _read_config(hass):
         return {}
 
     with open(path) as f_handle:
-        # Guard against empty file
-        return json.loads(f_handle.read() or '{}')
+        try:
+            data = json.loads(f_handle.read())
+        except Exception as ex:
+            _LOGGER.exception(str(ex))
+            data = '{}'
+        finally:
+            return data
 
 
 def _write_config(hass, config):
