@@ -116,7 +116,7 @@ def request_configuration(hass, config, host, name, allow_tradfri_groups):
         title = "{} ({})".format(title, name)
 
     security_code_field = {'id': 'security_code', 'name': 'Security Code'}
-    checbox_field = {'id': 'allow_tradfri_groups',
+    checkbox_field = {'id': 'allow_tradfri_groups',
                      'name': 'use Tradfri groups',
                      'type': 'checkbox',
                      'checked': allow_tradfri_groups}
@@ -125,7 +125,7 @@ def request_configuration(hass, config, host, name, allow_tradfri_groups):
         description='Please enter the security code written at the bottom of '
                     'your IKEA Trådfri Gateway.',
         submit_caption="Confirm",
-        fields=[security_code_field, checbox_field]
+        fields=[security_code_field, checkbox_field]
         )
 
 
